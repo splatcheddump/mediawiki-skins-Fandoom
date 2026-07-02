@@ -59,4 +59,64 @@ class CitizenComponentMainMenuTest extends MediaWikiUnitTestCase {
 			]
 		];
 	}
+
+	/**
+	 * @covers ::buildNavigationTree
+	 * @covers ::buildPortletTree
+	 * @covers ::buildTreeFromFlatList
+	 */
+	public function testTreeBuildingFromFlatList() {
+		$sidebarData = [
+			'data-portlets-first' => [
+				'array-list-items' => [
+					[
+						'text' => 'Items',
+						'item-level' => 0,
+					],
+					[
+						'text' => 'Weapons',
+						'item-level' => 1,
+					],
+					[
+						'text' => 'Swords',
+						'item-level' => 2,
+					],
+					[
+						'text' => 'Axes',
+						'item-level' => 2,
+					],
+					[
+						'text' => 'Armor',
+						'item-level' => 1,
+					],
+				]
+			],
+			'array-portlets-rest' => []
+		];
+
+		$mainMenu = new CitizenComponentMainMenu( $sidebarData, 'citizen-main-menu', true );
+		$templateData = $mainMenu->getTemplateData();
+
+		$firstPortlet = $templateData['data-portlets-first'];
+		$this->assertCount( 1, $firstPortlet['array-list-items'] );
+		
+		$items = $firstPortlet['array-list-items'][0];
+		$this->assertSame( 'Items', $items['text'] );
+		$this->assertTrue( $items['has-children'] );
+		$this->assertCount( 2, $items['array-children'] );
+
+		$weapons = $items['array-children'][0];
+		$this->assertSame( 'Weapons', $weapons['text'] );
+		$this->assertTrue( $weapons['has-children'] );
+		$this->assertCount( 2, $weapons['array-children'] );
+
+		$swords = $weapons['array-children'][0];
+		$this->assertSame( 'Swords', $swords['text'] );
+
+		$axes = $weapons['array-children'][1];
+		$this->assertSame( 'Axes', $axes['text'] );
+
+		$armor = $items['array-children'][1];
+		$this->assertSame( 'Armor', $armor['text'] );
+	}
 }

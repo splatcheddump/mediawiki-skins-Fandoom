@@ -1,4 +1,23 @@
 <section id="{{id}}" class="citizen-main-menu citizen-drawer__menu">
-	{{#data-portlets-first}}{{>Menu}}{{/data-portlets-first}}
-	{{#array-portlets-rest}}{{>Menu}}{{/array-portlets-rest}}
+	{{#data-portlets-first}}
+	<nav id="{{id}}" class="citizen-menu utw-navbar-menu{{#class}} {{.}}{{/class}}" {{{html-userlangattributes}}}>
+		{{#label}}<div class="citizen-menu__heading">{{.}}</div>{{/label}}
+		<ul class="citizen-menu__content-list utw-navbar-list">
+			{{#array-list-items}}{{>NavbarSubitem}}{{/array-list-items}}
+			{{#html-items}}{{{.}}}{{/html-items}}
+		</ul>
+	</nav>
+	{{/data-portlets-first}}
+	{{#array-portlets-rest}}
+	<nav id="{{id}}" class="citizen-menu utw-navbar-menu{{#class}} {{.}}{{/class}}" {{{html-userlangattributes}}}>
+		{{#label}}<div class="citizen-menu__heading">{{.}}</div>{{/label}}
+		<ul class="citizen-menu__content-list utw-navbar-list">
+			{{#array-list-items}}{{>NavbarSubitem}}{{/array-list-items}}
+			{{#html-items}}{{{.}}}{{/html-items}}
+		</ul>
+	</nav>
+	{{/array-portlets-rest}}
+	{{^is-language-in-content}}
+	{{#data-languages}}{{>Menu}}{{/data-languages}}
+	{{/is-language-in-content}}
 </section>

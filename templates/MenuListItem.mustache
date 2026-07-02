@@ -3,4 +3,9 @@
 	}}{{>Link}}{{!
 }}{{/array-links}}{{!
 }}{{text}}{{!
+}}{{#has-children}}{{!
+	}}<ul class="citizen-menu__children">{{!
+		}}{{#array-children}}{{>MenuListItem}}{{/array-children}}{{!
+	}}</ul>{{!
+}}{{/has-children}}{{!
 }}</li>

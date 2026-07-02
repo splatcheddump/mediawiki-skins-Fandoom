@@ -1,0 +1,18 @@
+<li id="{{item-id}}" class="mw-list-item utw-navbar-subitem{{#item-class}} {{.}}{{/item-class}}{{#has-children}} utw-navbar-parent{{/has-children}}">
+	{{#array-links}}
+	<a class="utw-navbar-subitem-link" href="{{href}}"{{#rel}} rel="{{.}}"{{/rel}}{{#target}} target="{{.}}"{{/target}}>
+		<span>{{text}}</span>
+	</a>
+	{{/array-links}}
+	{{^array-links}}
+	<span class="utw-navbar-subitem-text">{{text}}</span>
+	{{/array-links}}
+	{{#has-children}}<span class="vector-icon mw-ui-icon-next mw-ui-icon-wikimedia-next"></span>{{/has-children}}
+	{{#has-children}}
+	<div class="vector-menu-content utw-navbar-subitem-collapsable">
+		<ul class="vector-menu-content-list utw-navbar-menu">
+			{{#array-children}}{{>NavbarSubitem}}{{/array-children}}
+		</ul>
+	</div>
+	{{/has-children}}
+</li>
