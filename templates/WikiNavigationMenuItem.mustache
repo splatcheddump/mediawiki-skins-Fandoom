@@ -1,0 +1,13 @@
+<div id="{{item-id}}" class="citizen-wiki-nav-item{{#has-children}} citizen-wiki-nav-item--has-children{{/has-children}} {{item-class}}">
+	{{#array-links}}
+		{{>Link}}
+	{{/array-links}}
+	{{^array-links}}
+		<span class="citizen-wiki-nav-item__text">{{text}}</span>
+	{{/array-links}}
+	{{#has-children}}
+		<div class="citizen-wiki-nav-item__children">
+			{{#array-children}}{{>WikiNavigationMenuItem}}{{/array-children}}
+		</div>
+	{{/has-children}}
+</div>

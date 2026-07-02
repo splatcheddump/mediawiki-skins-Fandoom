@@ -102,36 +102,45 @@
 			color: inherit;
 		}
 
-		.citizen-main-menu,
-		.citizen-main-menu > .citizen-menu,
-		.citizen-main-menu > .citizen-menu > .citizen-menu__content,
-		.citizen-main-menu .citizen-menu__content-list {
+		.citizen-wiki-nav-menu,
+		.citizen-wiki-nav-menu__content {
 			display: flex;
+			align-items: center;
 			min-width: 0;
 		}
 
-		.citizen-main-menu {
-			padding: unset;
-			margin: unset;
-		}
-
-		.citizen-main-menu .citizen-menu__content-list {
+		.citizen-wiki-nav-menu {
 			gap: var( --space-md );
 		}
 
-		.citizen-main-menu .citizen-menu__item--has-children {
+		.citizen-wiki-nav-item {
 			position: relative;
+			font-weight: var( --font-weight-bold );
+			color: inherit;
+			text-transform: uppercase;
+			white-space: nowrap;
 
-			&:hover > .citizen-menu__children {
-				display: block;
-			}
-
-			> a {
+			a,
+			.citizen-wiki-nav-item__text {
 				display: flex;
 				gap: var( --space-xxs );
 				align-items: center;
+				min-height: 2rem;
+				padding: 0;
+				color: inherit;
+				cursor: pointer;
+				transition: var( --transition-hover );
+				transition-property: opacity;
 
-				&::after {
+				&:hover {
+					text-decoration: none;
+					opacity: 0.7;
+				}
+			}
+
+			&--has-children {
+				> a::after,
+				> .citizen-wiki-nav-item__text::after {
 					width: 1.25rem;
 					height: 1.25rem;
 					content: '';
