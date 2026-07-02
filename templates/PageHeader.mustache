@@ -1,7 +1,12 @@
 <header class="mw-body-header citizen-page-header" id="citizen-page-header">
 	<div class="citizen-page-header-inner">
-		{{#data-page-heading}}{{>PageHeading}}{{/data-page-heading}}
-		
+		<div class="citizen-page-header__categories">
+			{{{html-categories}}}
+		</div>
+		<div class="citizen-page-header__main">
+			{{#data-page-heading}}{{>PageHeading}}{{/data-page-heading}}
+			{{#data-page-tools}}{{>PageTools}}{{/data-page-tools}}
+		</div>
 	</div>
 </header>
 <div id="citizen-page-header-sticky-sentinel"></div>

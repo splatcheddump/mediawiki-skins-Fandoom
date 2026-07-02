@@ -202,15 +202,18 @@ class SkinCitizen extends SkinMustache {
 			'data-main-menu' => new CitizenComponentMainMenu( $sidebar ),
 			'data-header-menu' => new CitizenComponentMainMenu(
 				self::prefixMenuIds( $sidebar, 'citizen-header' ),
-				'citizen-header-menu'
+				'citizen-header-menu',
+				true
 			),
 			'data-sticky-navigation-menu' => new CitizenComponentMainMenu(
 				self::prefixMenuIds( $sidebar, 'citizen-sticky-navigation' ),
-				'citizen-sticky-navigation-menu'
+				'citizen-sticky-navigation-menu',
+				true
 			),
 			'data-wiki-navigation-menu' => new CitizenComponentMainMenu(
 				self::prefixMenuIds( $sidebar, 'citizen-wiki-navigation' ),
-				'citizen-wiki-navigation-menu'
+				'citizen-wiki-navigation-menu',
+				true
 			),
 			'data-page-footer' => new CitizenComponentPageFooter(
 				$localizer,
