@@ -1,0 +1,22 @@
+<div class="citizen-wiki-navigation">
+	<div class="citizen-wiki-navigation__inner">
+		<div class="citizen-wiki-navigation__brand">
+			{{>Header__logo}}
+			<div class="citizen-wiki-navigation__site">
+				{{>Wordmark}}
+				{{#data-wiki-navigation-menu}}
+					{{>MainMenu}}
+				{{/data-wiki-navigation-menu}}
+			</div>
+		</div>
+		<div class="citizen-wiki-navigation__end">
+			{{#data-wiki-navigation}}
+			<div class="citizen-wiki-navigation__page-count">
+				<strong>{{msg-page-count}}</strong>
+				<span>{{msg-pages}}</span>
+			</div>
+			{{/data-wiki-navigation}}
+			{{#data-page-tools}}{{>PageTools}}{{/data-page-tools}}
+		</div>
+	</div>
+</div>

@@ -1100,8 +1100,8 @@
 			"public": true
 		},
 		"HeaderPosition": {
-			"value": "left",
-			"description": "Position of the header on the desktop layout. Possible values: 'left', 'right', 'top' and 'bottom'",
+			"value": "top",
+			"description": "Position of the header on the desktop layout. Citizen renders the header at the top.",
 			"descriptionmsg": "citizen-config-headerposition",
 			"public": true
 		},

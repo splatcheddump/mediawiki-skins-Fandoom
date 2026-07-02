@@ -12,6 +12,7 @@ use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\SiteStats\SiteStats;
 use MediaWiki\Skins\Citizen\Components\CitizenComponentBodyContent;
 use MediaWiki\Skins\Citizen\Components\CitizenComponentFooter;
 use MediaWiki\Skins\Citizen\Components\CitizenComponentMainMenu;
@@ -143,11 +144,7 @@ class SkinCitizen extends SkinMustache {
 		}
 
 		// Header position
-		$headerPosition = $config->get( 'CitizenHeaderPosition' );
-		if ( !in_array( $headerPosition, [ 'left', 'right', 'top', 'bottom' ], true ) ) {
-			$headerPosition = 'top';
-		}
-		$classes[] = 'citizen-header-position-' . $headerPosition;
+		$classes[] = 'citizen-header-position-top';
 
 		$attrs['class'] = trim( $attrs['class'] . ' ' . implode( ' ', $classes ) );
 		return $attrs;
@@ -203,6 +200,18 @@ class SkinCitizen extends SkinMustache {
 				]
 			),
 			'data-main-menu' => new CitizenComponentMainMenu( $sidebar ),
+			'data-header-menu' => new CitizenComponentMainMenu(
+				self::prefixMenuIds( $sidebar, 'citizen-header' ),
+				'citizen-header-menu'
+			),
+			'data-sticky-navigation-menu' => new CitizenComponentMainMenu(
+				self::prefixMenuIds( $sidebar, 'citizen-sticky-navigation' ),
+				'citizen-sticky-navigation-menu'
+			),
+			'data-wiki-navigation-menu' => new CitizenComponentMainMenu(
+				self::prefixMenuIds( $sidebar, 'citizen-wiki-navigation' ),
+				'citizen-wiki-navigation-menu'
+			),
 			'data-page-footer' => new CitizenComponentPageFooter(
 				$localizer,
 				$parentData['data-portlets']['data-footer-info'] ?? []
@@ -280,6 +289,10 @@ class SkinCitizen extends SkinMustache {
 		// SkinTemplateNavigation hook (which ran inside parent::getTemplateData
 		// above). Drives the notifications dropdown in Header.mustache.
 		$parentData['data-notifications'] = $this->notificationData;
+		$parentData['data-wiki-navigation'] = [
+			'msg-page-count' => $lang->formatNum( SiteStats::pages() ),
+			'msg-pages' => $localizer->msg( 'pages' )->text(),
+		];
 
 		$parentData['toc-enabled'] = !empty( $parentData['data-toc'][ 'array-sections' ] );
 		if ( $parentData['toc-enabled'] ) {
@@ -315,6 +328,38 @@ class SkinCitizen extends SkinMustache {
 		}
 
 		return [ $sidebar, $pageToolsMenu ];
+	}
+
+	/**
+	 * Prefix copied navigation ids so the same sidebar data can render in
+	 * several desktop navigation surfaces without duplicating DOM ids.
+	 */
+	private static function prefixMenuIds( array $data, string $prefix ): array {
+		foreach ( $data as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$data[$key] = self::prefixMenuIds( $value, $prefix );
+				continue;
+			}
+
+			if (
+				in_array( $key, [ 'id', 'item-id' ], true ) &&
+				is_string( $value ) &&
+				$value !== ''
+			) {
+				$data[$key] = $prefix . '-' . $value;
+				continue;
+			}
+
+			if ( $key === 'html-items' && is_string( $value ) && $value !== '' ) {
+				$data[$key] = preg_replace(
+					'/\sid="([^"]+)"/',
+					' id="' . $prefix . '-$1"',
+					$value
+				) ?? $value;
+			}
+		}
+
+		return $data;
 	}
 
 	/**

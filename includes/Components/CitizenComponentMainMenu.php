@@ -10,12 +10,14 @@ namespace MediaWiki\Skins\Citizen\Components;
 class CitizenComponentMainMenu implements CitizenComponent {
 
 	public function __construct(
-		private readonly array $sidebarData
+		private readonly array $sidebarData,
+		private readonly string $id = 'citizen-main-menu'
 	) {
 	}
 
 	public function getTemplateData(): array {
 		return [
+			'id' => $this->id,
 			'data-portlets-first' => (
 				new CitizenComponentMenu( $this->sidebarData['data-portlets-first'] )
 			)->getTemplateData(),

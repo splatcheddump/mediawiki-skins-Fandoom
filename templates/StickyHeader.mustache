@@ -3,6 +3,11 @@
 		<div class="citizen-sticky-header-background"></div>
 		<div class="citizen-sticky-header-inner">
 			<div class="citizen-sticky-header-start">
+				{{>Header__logo}}
+				{{>Wordmark}}
+				{{#data-sticky-navigation-menu}}
+					{{>MainMenu}}
+				{{/data-sticky-navigation-menu}}
 				<a
 					href="#top"
 					title="{{msg-citizen-jumptotop}}"

@@ -15,6 +15,24 @@ class CitizenComponentStickyHeader implements CitizenComponent {
 		'icon' => 'wikimedia-share'
 	];
 
+	private const SEARCH_ICON = [
+		'id' => 'citizen-search-sticky-header',
+		'clickTarget' => '#citizen-search-summary',
+		'icon' => 'wikimedia-search'
+	];
+
+	private const NOTIFICATIONS_ICON = [
+		'id' => 'citizen-notifications-sticky-header',
+		'clickTarget' => '#citizen-notifications-summary',
+		'icon' => 'wikimedia-bell'
+	];
+
+	private const USER_ICON = [
+		'id' => 'citizen-user-menu-sticky-header',
+		'clickTarget' => '#citizen-userMenu-summary',
+		'icon' => 'wikimedia-userAvatar'
+	];
+
 	private const TALK_ICON = [
 		'id' => 'ca-talk-sticky-header',
 		'clickTarget' => '#ca-talk > a',
@@ -84,6 +102,9 @@ class CitizenComponentStickyHeader implements CitizenComponent {
 		}
 
 		array_push( $icons,
+			self::SEARCH_ICON,
+			self::NOTIFICATIONS_ICON,
+			self::USER_ICON,
 			self::VIEW_ICON,
 			self::SUBJECT_ICON,
 			self::HISTORY_ICON,

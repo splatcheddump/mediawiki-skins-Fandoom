@@ -14,13 +14,13 @@ The skin configs allow more customization on the specific features in the skin.
 
 ### `$wgCitizenHeaderPosition`
 
-Determines where the site header appears on desktop screens.
+Citizen renders the site header at the top of desktop screens.
 
 ```php [LocalSettings.php]
 $wgCitizenHeaderPosition = 'top';
 ```
 
-**Values**: `'left'`, `'right'`, `'top'`, `'bottom'`
+**Value**: `'top'`
 
 ### `$wgCitizenThemeDefault`
 

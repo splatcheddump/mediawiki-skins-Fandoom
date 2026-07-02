@@ -4,11 +4,16 @@
 }}
 <header class="mw-header citizen-header">
 	{{>Header__logo}}
-	{{#data-search-box}}{{>Search}}{{/data-search-box}}
-	{{>Drawer}}
 	<div class="citizen-header__inner">
-		<div class="citizen-header__start"></div>
+		<div class="citizen-header__start">
+			{{>Wordmark}}
+			{{#data-header-menu}}
+				{{>MainMenu}}
+			{{/data-header-menu}}
+		</div>
+		{{#data-search-box}}{{>Search}}{{/data-search-box}}
 		<div class="citizen-header__end">
+			{{>Drawer}}
 			{{>Preferences}}
 			{{#data-notifications}}{{>Notifications}}{{/data-notifications}}
 			{{>UserMenu}}

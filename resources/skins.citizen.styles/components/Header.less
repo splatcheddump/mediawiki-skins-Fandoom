@@ -49,7 +49,7 @@
 	&__inner {
 		display: flex;
 		flex-grow: 1;
-		flex-direction: var( --header-direction );
+		flex-direction: row;
 		gap: var( --space-xxs );
 		justify-content: space-between;
 		min-width: 0;
@@ -60,7 +60,7 @@
 	&__end {
 		display: flex;
 		flex-shrink: 0; // let _inner handle the overflow
-		flex-direction: var( --header-direction );
+		flex-direction: row;
 		gap: var( --space-xxs );
 
 		// Hide top-level menu header labels
@@ -72,6 +72,11 @@
 	&__start {
 		align-items: center;
 		min-width: 0;
+	}
+
+	.mw-logo-wordmark,
+	.citizen-main-menu {
+		display: none;
 	}
 
 	.citizen-dropdown {
@@ -151,6 +156,47 @@
 
 		.citizen-header-position-top & {
 			padding: var( --space-xs ) var( --space-xxl );
+		}
+
+		.citizen-drawer {
+			display: none;
+		}
+
+		&__start {
+			flex: 1 1 auto;
+		}
+
+		.mw-logo-wordmark {
+			display: block;
+			flex: 0 1 auto;
+			max-width: 14rem;
+		}
+
+		.citizen-main-menu {
+			display: flex;
+			flex: 1 1 auto;
+			min-width: 0;
+			overflow: hidden;
+		}
+
+		.citizen-main-menu > .citizen-menu,
+		.citizen-main-menu > .citizen-menu > .citizen-menu__content,
+		.citizen-main-menu .citizen-menu__content-list {
+			display: flex;
+			min-width: 0;
+		}
+
+		.citizen-main-menu .citizen-menu__content-list {
+			gap: var( --space-xxs );
+			overflow: hidden;
+		}
+
+		.citizen-main-menu .mw-list-item a {
+			min-height: 2.5rem;
+			padding-inline: var( --space-sm );
+			font-weight: var( --font-weight-bold );
+			text-transform: uppercase;
+			white-space: nowrap;
 		}
 	}
 }
