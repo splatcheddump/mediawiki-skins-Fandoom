@@ -1,0 +1,12 @@
+<div id="{{id}}" class="citizen-wiki-nav-menu">
+	{{#data-portlets-first}}
+		<div class="citizen-wiki-nav-menu__content">
+			{{#array-list-items}}{{>WikiNavigationMenuItem}}{{/array-list-items}}
+		</div>
+	{{/data-portlets-first}}
+	{{#array-portlets-rest}}
+		<div class="citizen-wiki-nav-menu__content">
+			{{#array-list-items}}{{>WikiNavigationMenuItem}}{{/array-list-items}}
+		</div>
+	{{/array-portlets-rest}}
+</div>
