@@ -17,7 +17,7 @@ The skin configs allow more customization on the specific features in the skin.
 Determines where the site header appears on desktop screens.
 
 ```php [LocalSettings.php]
-$wgCitizenHeaderPosition = 'left';
+$wgCitizenHeaderPosition = 'top';
 ```
 
 **Values**: `'left'`, `'right'`, `'top'`, `'bottom'`

@@ -145,7 +145,7 @@ class SkinCitizen extends SkinMustache {
 		// Header position
 		$headerPosition = $config->get( 'CitizenHeaderPosition' );
 		if ( !in_array( $headerPosition, [ 'left', 'right', 'top', 'bottom' ], true ) ) {
-			$headerPosition = 'left';
+			$headerPosition = 'top';
 		}
 		$classes[] = 'citizen-header-position-' . $headerPosition;
 
