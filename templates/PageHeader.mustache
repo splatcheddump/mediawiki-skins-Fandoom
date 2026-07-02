@@ -1,7 +1,14 @@
 <header class="mw-body-header citizen-page-header" id="citizen-page-header">
 	<div class="citizen-page-header-inner">
-		<div class="citizen-page-header__categories">
-			{{{html-categories}}}
+		<div class="citizen-page-header__top">
+			<div class="citizen-page-header__categories">
+				{{{html-categories}}}
+			</div>
+			{{#data-page-tools}}
+				{{#has-languages}}
+					{{>PageTools__languages}}
+				{{/has-languages}}
+			{{/data-page-tools}}
 		</div>
 		<div class="citizen-page-header__main">
 			{{#data-page-heading}}{{>PageHeading}}{{/data-page-heading}}

@@ -6,9 +6,7 @@
 
 	&-inner {
 		display: flex;
-		flex-wrap: wrap;
-		gap: var( --space-md );
-		align-items: center;
+		flex-direction: column;
 		max-width: var( --width-layout ); // max-width should sync with .citizen-body-container
 		padding-block: var( --space-md );
 		margin-inline: auto;
@@ -17,6 +15,89 @@
 			.citizen-toc-enabled & {
 				max-width: var( --width-page );
 			}
+		}
+	}
+
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-bottom: var( --space-sm );
+
+		.citizen-page-languages {
+			margin-inline-start: auto;
+
+			.citizen-dropdown-summary {
+				gap: var( --space-xxs );
+				padding: 0;
+				font-size: var( --font-size-small );
+				font-weight: var( --font-weight-bold );
+				color: var( --color-progressive );
+				text-transform: uppercase;
+
+				&::after {
+					position: static;
+					padding: 0;
+					font-size: inherit;
+					content: attr( data-counter-text );
+					background: none;
+				}
+
+				.citizen-ui-icon {
+					--size-icon: 1.25rem;
+				}
+
+				// Hide original label and show our own if needed, but here we just want to style it
+			}
+		}
+	}
+
+	&__main {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var( --space-md );
+		align-items: center;
+	}
+
+	&__categories {
+		.mw-normal-catlinks {
+			display: flex;
+			gap: var( --space-xxs );
+			align-items: center;
+			font-size: var( --font-size-small );
+			font-weight: var( --font-weight-bold );
+
+			&::before {
+				text-transform: lowercase;
+				content: '(in:';
+			}
+
+			&::after {
+				content: ')';
+			}
+
+			#mw-normal-catlinks {
+				display: none;
+			}
+
+			ul {
+				display: inline;
+				padding: 0;
+				margin: 0;
+				list-style: none;
+
+				li {
+					display: inline;
+
+					&:not( :last-child )::after {
+						content: ', ';
+					}
+				}
+			}
+		}
+
+		.mw-hidden-catlinks {
+			display: none;
 		}
 	}
 }

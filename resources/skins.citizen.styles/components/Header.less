@@ -138,15 +138,6 @@
 }
 
 @media ( min-width: @min-width-breakpoint-desktop ) {
-	.citizen-header .citizen-main-menu {
-		margin: unset;
-		padding: unset;
-	}
-
-	.citizen-header .mw-logo-wordmark {
-		font-size: inherit;
-	}
-
 	.citizen-header {
 		inset-block: var( --header-inset-block-start ) var( --header-inset-block-end );
 		inset-inline: var( --header-inset-inline-start ) var( --header-inset-inline-end );
@@ -164,8 +155,8 @@
 		}
 
 		.citizen-header-position-top & {
-			padding: var( --space-xs ) var( --space-xxl );
 			align-items: center;
+			padding: var( --space-xs ) var( --space-xxl );
 		}
 
 		.citizen-drawer {
@@ -180,12 +171,15 @@
 			display: block;
 			flex: 0 1 auto;
 			max-width: 14rem;
+			font-size: inherit;
 		}
 
 		.citizen-main-menu {
 			display: flex;
 			flex: 1 1 auto;
 			min-width: 0;
+			padding: unset;
+			margin: unset;
 			overflow: hidden;
 		}
 

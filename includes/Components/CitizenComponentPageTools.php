@@ -73,6 +73,7 @@ class CitizenComponentPageTools implements CitizenComponent {
 		$articleTools = $this->pageToolsMenu;
 
 		return [
+			'is-page-header' => true,
 			'data-article-tools' => $articleTools,
 			'is-visible' => $this->shouldShowPageTools(),
 			// There are edge cases where the menu is completely empty

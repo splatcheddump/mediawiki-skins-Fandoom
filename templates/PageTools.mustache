@@ -5,7 +5,9 @@
 }}
 <div class="citizen-page-actions">
 	{{#is-sharable}}{{>Share}}{{/is-sharable}}
-	{{#has-languages}}{{>PageTools__languages}}{{/has-languages}}
+	{{^is-page-header}}
+		{{#has-languages}}{{>PageTools__languages}}{{/has-languages}}
+	{{/is-page-header}}
 	{{#is-visible}}
 		{{#data-portlets.data-views}}{{>Menu}}{{/data-portlets.data-views}}
 		{{#data-portlets.data-associated-pages}}{{>Menu}}{{/data-portlets.data-associated-pages}}
