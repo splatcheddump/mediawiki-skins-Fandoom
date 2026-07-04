@@ -31,7 +31,7 @@
 		top: 0;
 		right: 0;
 		left: 0;
-		z-index: @z-index-sticky;
+		z-index: @z-index-fixed;
 		visibility: hidden;
 		transform: translateY( -100% );
 		transition-timing-function: var( --transition-timing-function-ease-out );
@@ -201,39 +201,6 @@
 
 		.citizen-main-menu .citizen-menu:hover .citizen-menu__heading::after {
 			transform: rotate( 180deg );
-		}
-
-		.citizen-main-menu .citizen-menu .citizen-menu__content-list {
-			position: absolute;
-			top: 100%;
-			left: 0;
-			z-index: 1000;
-			display: flex;
-			visibility: hidden;
-			flex-direction: column;
-			min-width: 15rem;
-			padding-top: var( --space-xs );
-			padding-bottom: var( --space-xs );
-			pointer-events: none;
-			list-style: none;
-			background-color: var( --background-color-base );
-			border: var( --border-width-base ) solid var( --border-color-base );
-			border-radius: var( --border-radius-medium );
-			box-shadow: var( --box-shadow-large );
-			opacity: 0;
-			transition:
- opacity var( --transition-duration-base ) var( --transition-timing-function-ease-out ),visibility var( --transition-duration-base ) var( --transition-timing-function-ease-out );
-
-			.utw-navbar-subitem {
-				width: 100%;
-			}
-		}
-
-		.citizen-main-menu .citizen-menu:hover .citizen-menu__content-list,
-		.citizen-main-menu .citizen-menu:focus-within .citizen-menu__content-list {
-			visibility: visible;
-			pointer-events: auto;
-			opacity: 1;
 		}
 
 		.cdx-button {
