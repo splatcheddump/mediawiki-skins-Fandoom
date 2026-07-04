@@ -143,7 +143,7 @@
 				transform: rotate( 180deg );
 			}
 
-			// First level dropdown
+			// First level dropdown — no margin-top (use padding-top) to keep hover area bridged
 			.citizen-menu__content-list {
 				position: absolute;
 				top: 100%;
@@ -152,8 +152,10 @@
 				display: flex;
 				flex-direction: column;
 				min-width: 15rem;
-				margin-top: var( --space-xs );
-				padding: var( --space-xs ) 0;
+				// padding-top instead of margin-top bridges the gap so
+				// moving the mouse to the dropdown does not break hover
+				padding-top: var( --space-xs );
+				padding-bottom: var( --space-xs );
 				list-style: none;
 				background-color: var( --background-color-base );
 				border: var( --border-width-base ) solid var( --border-color-base );
@@ -176,14 +178,6 @@
 				visibility: visible;
 				pointer-events: auto;
 			}
-		}
-
-		// Ensure cascading submenus fly out to the right instead of dropping down
-		.utw-navbar-subitem-collapsable {
-			top: 0 !important;
-			left: 100% !important;
-			margin-top: 0 !important;
-			margin-left: var( --space-xs ) !important;
 		}
 
 		.citizen-page-actions {

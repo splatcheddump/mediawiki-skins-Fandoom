@@ -69,6 +69,7 @@ function main( window ) {
 		{ createNotifications } = require( './notifications.js' ),
 		search = require( './search.js' ),
 		dropdown = require( './dropdown.js' ),
+		navbarSubmenu = require( './navbarSubmenu.js' ),
 		{ createLastModified } = require( './lastModified.js' ),
 		{ createShare } = require( './share.js' ),
 		setupObservers = require( './setupObservers.js' ),
@@ -83,6 +84,7 @@ function main( window ) {
 	createNotifications( { document, mw } ).init();
 	setupObservers.init( { document, window, mw, IntersectionObserver } );
 	dropdown.init( { document, window } );
+	navbarSubmenu.init( { document } );
 	createLastModified( { document, Intl } ).init();
 	createShare( {
 		document,

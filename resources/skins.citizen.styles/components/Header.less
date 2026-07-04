@@ -185,28 +185,78 @@
 		.citizen-main-menu {
 			display: flex;
 			flex: 1 1 auto;
+			align-items: center;
+			gap: var( --space-lg );
 			min-width: 0;
-			overflow: hidden;
+			overflow: visible;
 		}
 
-		.citizen-main-menu > .citizen-menu,
-		.citizen-main-menu > .citizen-menu > .citizen-menu__content,
-		.citizen-main-menu .citizen-menu__content-list {
+		// Each portlet becomes a relative dropdown trigger
+		.citizen-main-menu .citizen-menu {
+			position: relative;
+			overflow: visible;
+		}
+
+		.citizen-main-menu .citizen-menu .citizen-menu__heading {
 			display: flex;
-			min-width: 0;
-		}
-
-		.citizen-main-menu .citizen-menu__content-list {
-			gap: var( --space-xxs );
-			overflow: hidden;
-		}
-
-		.citizen-main-menu .mw-list-item a {
+			align-items: center;
+			gap: var( --space-xs );
 			min-height: 2.5rem;
 			padding-inline: var( --space-sm );
 			font-weight: var( --font-weight-bold );
 			text-transform: uppercase;
 			white-space: nowrap;
+			cursor: pointer;
+
+			&::after {
+				content: '';
+				display: inline-block;
+				width: 0;
+				height: 0;
+				border-left: 4px solid transparent;
+				border-right: 4px solid transparent;
+				border-top: 4px solid currentcolor;
+				opacity: 0.7;
+				margin-inline-start: var( --space-xs );
+				transition: transform var( --transition-duration-base ) var( --transition-timing-function-ease );
+			}
+		}
+
+		.citizen-main-menu .citizen-menu:hover .citizen-menu__heading::after {
+			transform: rotate( 180deg );
+		}
+
+		.citizen-main-menu .citizen-menu .citizen-menu__content-list {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			z-index: 1000;
+			display: flex;
+			flex-direction: column;
+			min-width: 15rem;
+			padding-top: var( --space-xs );
+			padding-bottom: var( --space-xs );
+			list-style: none;
+			background-color: var( --background-color-base );
+			border: var( --border-width-base ) solid var( --border-color-base );
+			border-radius: var( --border-radius-medium );
+			box-shadow: var( --box-shadow-large );
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+			transition: opacity var( --transition-duration-base ) var( --transition-timing-function-ease-out ),
+					visibility var( --transition-duration-base ) var( --transition-timing-function-ease-out );
+
+			.utw-navbar-subitem {
+				width: 100%;
+			}
+		}
+
+		.citizen-main-menu .citizen-menu:hover .citizen-menu__content-list,
+		.citizen-main-menu .citizen-menu:focus-within .citizen-menu__content-list {
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
 		}
 	}
 }

@@ -1,37 +1,40 @@
-// Navbar submenu styling for hierarchical navigation
+// ============================================================
+// Navbar submenu styling — desktop hover dropdowns + mobile panels
+// ============================================================
+
 .utw-navbar-list {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
+// ---------------------------------------------------------------
+// Base item — used everywhere (desktop dropdown + mobile drawer)
+// ---------------------------------------------------------------
 .utw-navbar-subitem {
 	position: relative;
 	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 
-	// Link styling
+	// Link
 	.utw-navbar-subitem-link {
 		display: flex;
+		flex: 1 1 0;
 		gap: var( --space-sm );
 		align-items: center;
-		justify-content: space-between;
-		width: 100%;
 		min-height: 2.25rem;
 		padding: var( --space-xs ) var( --space-md );
 		font-weight: var( --font-weight-medium );
 		color: var( --color-base );
 		text-decoration: none;
-		transition: var( --transition-hover );
-		transition-property: background-color, color;
+		transition: background-color var( --transition-duration-base ) var( --transition-timing-function-ease );
 		border-radius: var( --border-radius-base );
 
-		&:hover {
-			background-color: var( --background-color-button-quiet--hover );
-		}
-
+		&:hover,
 		&:focus {
 			background-color: var( --background-color-button-quiet--hover );
-			outline: none;
 		}
 
 		&:active {
@@ -42,115 +45,195 @@
 	// Text-only item (no link)
 	.utw-navbar-subitem-text {
 		display: flex;
+		flex: 1 1 0;
 		gap: var( --space-sm );
 		align-items: center;
-		justify-content: space-between;
-		width: 100%;
 		min-height: 2.25rem;
 		padding: var( --space-xs ) var( --space-md );
 		font-weight: var( --font-weight-medium );
 		color: var( --color-subtle );
+		cursor: default;
 	}
 
-	// Arrow icon for items with children
+	// Chevron shown only on desktop (flyout indicator)
 	.vector-icon {
 		flex-shrink: 0;
 		width: var( --size-icon );
 		height: var( --size-icon );
 		opacity: 0.7;
 	}
+}
 
-	// Collapsible submenu container
-	.utw-navbar-subitem-collapsable {
-		position: absolute;
-		top: 100%;
-		left: var( --space-md );
-		z-index: 1000;
-		min-width: 15rem;
-		margin-top: var( --space-xs );
-		background-color: var( --background-color-base );
-		border: var( --border-width-base ) solid var( --border-color-base );
-		border-radius: var( --border-radius-medium );
-		box-shadow: var( --box-shadow-large );
-		overflow: hidden;
-		opacity: 0;
-		visibility: hidden;
-		transition: opacity var( --transition-duration-base ) var( --transition-timing-function-ease-out ),
-				visibility var( --transition-duration-base ) var( --transition-timing-function-ease-out );
-		pointer-events: none;
+// ---------------------------------------------------------------
+// Desktop-only: absolute flyout submenus
+// ---------------------------------------------------------------
+@media ( min-width: @min-width-breakpoint-desktop ) {
+	.utw-navbar-subitem {
+		// Hidden flyout panel — appears on hover
+		.utw-navbar-subitem-collapsable {
+			// Position: flyout to the RIGHT of parent item
+			position: absolute;
+			top: 0;
+			left: 100%;
+			z-index: 1100;
+			min-width: 15rem;
+			// Use padding instead of margin so the hover area is unbroken
+			padding-left: var( --space-xs );
+			background-clip: padding-box;
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+			transition: opacity var( --transition-duration-base ) var( --transition-timing-function-ease-out ),
+					visibility var( --transition-duration-base ) var( --transition-timing-function-ease-out );
 
-		.utw-navbar-menu {
-			margin: 0;
-			padding: var( --space-xs ) 0;
-			list-style: none;
-		}
-
-		.utw-navbar-subitem {
-			.utw-navbar-subitem-link,
-			.utw-navbar-subitem-text {
-				padding-left: var( --space-lg );
-				padding-right: var( --space-md );
+			.utw-navbar-menu {
+				margin: 0;
+				padding: var( --space-xs ) 0;
+				list-style: none;
+				background-color: var( --background-color-base );
+				border: var( --border-width-base ) solid var( --border-color-base );
+				border-radius: var( --border-radius-medium );
+				box-shadow: var( --box-shadow-large );
 			}
 		}
-	}
 
-	// Show submenu on parent hover/focus
-	&:hover .utw-navbar-subitem-collapsable,
-	&:focus-within .utw-navbar-subitem-collapsable {
-		opacity: 1;
-		visibility: visible;
-		pointer-events: auto;
-	}
+		// Show flyout on hover/focus
+		&:hover > .utw-navbar-subitem-collapsable,
+		&:focus-within > .utw-navbar-subitem-collapsable {
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+		}
 
-	// Parent item styling
-	&.utw-navbar-parent {
-		// Highlight parent on hover
-		&:hover > .utw-navbar-subitem-link,
-		&:hover > .utw-navbar-subitem-text {
+		// Highlight parent link while flyout is open
+		&.utw-navbar-parent:hover > .utw-navbar-subitem-link,
+		&.utw-navbar-parent:hover > .utw-navbar-subitem-text {
 			background-color: var( --background-color-button-quiet--hover );
 		}
 	}
 }
 
-// Top-level navbar menu styling
-.utw-navbar-menu {
-	margin: 0;
-	padding: var( --space-xs ) 0;
-	list-style: none;
-
-	&.citizen-menu__content-list {
-		// Override menu list default styles
-		padding: var( --space-xs ) 0;
-	}
-}
-
-// Drawer-specific menu styling
+// ---------------------------------------------------------------
+// Mobile drawer: hide absolute flyouts entirely, use JS panels
+// ---------------------------------------------------------------
 .citizen-drawer__menu {
-	// Allow submenus to overflow the grid
-	.utw-navbar-menu {
-		// Override grid layout for hierarchical menus
-		display: block;
-		grid-column: unset;
+	// The utw-navbar-subitem-collapsable elements inside the drawer
+	// must NOT be visible as hover popups — they are read by the JS
+	// panel system but are otherwise hidden.
+	.utw-navbar-subitem {
+		.utw-navbar-subitem-collapsable {
+			display: none !important;
+		}
+
+		// Hide the desktop flyout arrow — JS adds its own chevron button
+		.vector-icon {
+			display: none;
+		}
 	}
 
-	.utw-navbar-subitem {
-		// Ensure proper stacking context
-		z-index: 1;
+	// JS-added chevron button for opening the slide panel
+	.utw-drawer-chevron {
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		min-height: 2.25rem;
+		margin-inline-start: auto;
+		color: var( --color-subtle );
+		border-radius: var( --border-radius-base );
+		cursor: pointer;
 
-		.utw-navbar-subitem-collapsable {
-			// Use a very high z-index for drawer submenus
-			z-index: 1001;
+		&:hover {
+			background-color: var( --background-color-button-quiet--hover );
+			color: var( --color-base );
+		}
+	}
+
+	// Outer container for the panel stack (clips slide-in panels)
+	.utw-drawer-panel-container {
+		position: relative;
+		overflow: hidden;
+	}
+
+	// Slide-in sub-panels
+	.utw-drawer-panel {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		display: flex;
+		flex-direction: column;
+		background-color: var( --background-color-base );
+		transform: translateX( 100% );
+		transition: transform var( --transition-duration-base ) var( --transition-timing-function-ease );
+		overflow-y: auto;
+		z-index: 10;
+
+		&--active {
+			transform: translateX( 0 );
+		}
+
+		// Panel header (back button + title)
+		&__header {
+			display: flex;
+			align-items: center;
+			gap: var( --space-sm );
+			padding: var( --space-xs ) var( --space-sm );
+			border-bottom: var( --border-subtle );
+		}
+
+		&__back {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 2.25rem;
+			height: 2.25rem;
+			border-radius: var( --border-radius-base );
+			background: none;
+			border: none;
+			cursor: pointer;
+			color: var( --color-base );
+			flex-shrink: 0;
+
+			&:hover {
+				background-color: var( --background-color-button-quiet--hover );
+			}
+		}
+
+		&__title {
+			font-weight: var( --font-weight-bold );
+			font-size: var( --font-size-small );
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			color: var( --color-subtle );
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		&__list {
+			margin: 0;
+			padding: var( --space-xs ) 0;
+			list-style: none;
 		}
 	}
 }
 
-// Drawer card override to allow overflow
-.citizen-drawer__card {
-	overflow: visible;
-
-	&-content {
-		overflow: visible;
+// ---------------------------------------------------------------
+// Desktop: first-level dropdown list from WikiNavigation / Header
+// ---------------------------------------------------------------
+// The first-level dropdown is controlled via .citizen-menu in
+// WikiNavigation.less / Header.less / StickyHeader.less.
+// These rules ensure the inner subitem panel bridge works.
+@media ( min-width: @min-width-breakpoint-desktop ) {
+	.citizen-menu {
+		// Bridge gap between heading and dropdown with padding-top
+		.citizen-menu__content-list {
+			// No margin-top — use padding-top on the list itself
+			margin-top: 0;
+			padding-top: var( --space-xs );
+		}
 	}
 }
-
-
