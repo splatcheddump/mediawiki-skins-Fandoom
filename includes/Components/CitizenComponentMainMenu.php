@@ -88,7 +88,7 @@ class CitizenComponentMainMenu implements CitizenComponent {
 		$tree = [];
 		$stack = []; // Stack of [level => item_reference]
 
-		foreach ( $listItems as $item ) {
+		foreach ( $listItems as &$item ) {
 			$level = (int)( $item['item-level'] ?? 0 );
 
 			// Initialize children array if missing
@@ -104,12 +104,12 @@ class CitizenComponentMainMenu implements CitizenComponent {
 			// If we have a parent in the stack, add this as its child
 			if ( !empty( $stack ) ) {
 				$parent = &$stack[ count( $stack ) - 1 ]['item'];
-				$parent['array-children'][] = $item;
+				$parent['array-children'][] = &$item;
 				$parent['has-children'] = true;
 				$parent['item-class'] = trim( ( $parent['item-class'] ?? '' ) . ' citizen-menu__item--has-children' );
 			} else {
 				// Top-level item
-				$tree[] = $item;
+				$tree[] = &$item;
 			}
 
 			// Add to stack for potential children
