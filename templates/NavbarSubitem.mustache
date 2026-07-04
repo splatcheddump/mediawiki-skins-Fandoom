@@ -2,12 +2,12 @@
 	{{#array-links}}
 	<a class="utw-navbar-subitem-link" href="{{href}}"{{#rel}} rel="{{.}}"{{/rel}}{{#target}} target="{{.}}"{{/target}}>
 		<span>{{text}}</span>
-		{{#../has-children}}<span class="vector-icon mw-ui-icon-next mw-ui-icon-wikimedia-next"></span>{{/../has-children}}
 	</a>
 	{{/array-links}}
 	{{^array-links}}
-	<span class="utw-navbar-subitem-text">{{text}}{{#has-children}}<span class="vector-icon mw-ui-icon-next mw-ui-icon-wikimedia-next"></span>{{/has-children}}</span>
+	<span class="utw-navbar-subitem-text">{{text}}</span>
 	{{/array-links}}
+	{{#has-children}}<span class="vector-icon mw-ui-icon-next mw-ui-icon-wikimedia-next"></span>{{/has-children}}
 	{{#has-children}}
 	<div class="vector-menu-content utw-navbar-subitem-collapsable">
 		<ul class="vector-menu-content-list utw-navbar-menu">
