@@ -1,13 +1,18 @@
-<li id="{{id}}" class="mw-list-item utw-navbar-subitem {{ #hasItems }}utw-navbar-parent{{ /hasItems }}">
+<li id="{{item-id}}" class="mw-list-item utw-navbar-subitem{{#item-class}} {{.}}{{/item-class}}{{#has-children}} utw-navbar-parent{{/has-children}}">
+	{{#array-links}}
 	<a class="utw-navbar-subitem-link" href="{{href}}"{{#rel}} rel="{{.}}"{{/rel}}{{#target}} target="{{.}}"{{/target}}>
 		<span>{{text}}</span>
-		{{ #hasItems }} <span class="vector-icon mw-ui-icon-next mw-ui-icon-wikimedia-next"></span> {{ /hasItems }}
+		{{#../has-children}}<span class="vector-icon mw-ui-icon-next mw-ui-icon-wikimedia-next"></span>{{/../has-children}}
 	</a>
-	{{ #hasItems }}
+	{{/array-links}}
+	{{^array-links}}
+	<span class="utw-navbar-subitem-text">{{text}}{{#has-children}}<span class="vector-icon mw-ui-icon-next mw-ui-icon-wikimedia-next"></span>{{/has-children}}</span>
+	{{/array-links}}
+	{{#has-children}}
 	<div class="vector-menu-content utw-navbar-subitem-collapsable">
 		<ul class="vector-menu-content-list utw-navbar-menu">
-			{{#items}}{{>NavbarSubitem}}{{/items}}
+			{{#array-children}}{{>NavbarSubitem}}{{/array-children}}
 		</ul>
 	</div>
-	{{ /hasItems }}
+	{{/has-children}}
 </li>

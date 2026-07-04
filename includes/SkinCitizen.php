@@ -199,7 +199,7 @@ class SkinCitizen extends SkinMustache {
 					'data-footer-icons' => $parentData['data-portlets']['data-footer-icons'] ?? [],
 				]
 			),
-			'data-main-menu' => new CitizenComponentMainMenu( $sidebar ),
+			'data-main-menu' => new CitizenComponentMainMenu( $sidebar, 'citizen-main-menu', true ),
 			'data-header-menu' => new CitizenComponentMainMenu(
 				self::prefixMenuIds( $sidebar, 'citizen-header' ),
 				'citizen-header-menu',
