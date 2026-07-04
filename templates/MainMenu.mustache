@@ -4,6 +4,7 @@
 		{{#label}}<div class="citizen-menu__heading">{{.}}</div>{{/label}}
 		<ul class="citizen-menu__content-list utw-navbar-list">
 			{{#array-list-items}}{{>NavbarSubitem}}{{/array-list-items}}
+			{{#html-items}}{{{.}}}{{/html-items}}
 		</ul>
 	</nav>
 	{{/data-portlets-first}}
@@ -12,6 +13,7 @@
 		{{#label}}<div class="citizen-menu__heading">{{.}}</div>{{/label}}
 		<ul class="citizen-menu__content-list utw-navbar-list">
 			{{#array-list-items}}{{>NavbarSubitem}}{{/array-list-items}}
+			{{#html-items}}{{{.}}}{{/html-items}}
 		</ul>
 	</nav>
 	{{/array-portlets-rest}}
