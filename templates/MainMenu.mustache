@@ -1,4 +1,6 @@
-<section id="{{id}}" class="citizen-main-menu citizen-drawer__menu">
-	{{#data-portlets-first}}{{>Menu}}{{/data-portlets-first}}
-	{{#array-portlets-rest}}{{>Menu}}{{/array-portlets-rest}}
-</section>
+{{! >PinnableElement/Open}}
+	{{#data-navbar}}{{>NavbarItem}}{{/data-navbar}}
+	{{^is-language-in-content}}
+	{{#data-languages}}{{>Menu}}{{/data-languages}}
+	{{/is-language-in-content}}
+{{! >PinnableElement/Close}}
