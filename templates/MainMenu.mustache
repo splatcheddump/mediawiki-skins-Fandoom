@@ -1,31 +1,21 @@
 <section id="{{id}}" class="citizen-main-menu citizen-drawer__menu">
 	{{#data-portlets-first}}
-	{{#array-list-items}}
-	<nav id="{{item-id}}" class="citizen-menu utw-navbar-menu{{#item-class}} {{.}}{{/item-class}}" {{#html-userlangattributes}}{{{.}}}{{/html-userlangattributes}}>
+	<nav id="{{id}}" class="citizen-menu utw-navbar-menu{{#class}} {{.}}{{/class}}" {{{html-userlangattributes}}}>
 		{{#label}}<div class="citizen-menu__heading">{{.}}</div>{{/label}}
 		<ul class="citizen-menu__content-list utw-navbar-list">
-			{{#array-children}}{{>NavbarSubitem}}{{/array-children}}
+			{{#array-list-items}}{{>NavbarSubitem}}{{/array-list-items}}
 		</ul>
 	</nav>
-	{{/array-list-items}}
 	{{/data-portlets-first}}
 	{{#array-portlets-rest}}
-	{{#array-list-items}}
-	<nav id="{{item-id}}" class="citizen-menu utw-navbar-menu{{#item-class}} {{.}}{{/item-class}}" {{#html-userlangattributes}}{{{.}}}{{/html-userlangattributes}}>
+	<nav id="{{id}}" class="citizen-menu utw-navbar-menu{{#class}} {{.}}{{/class}}" {{{html-userlangattributes}}}>
 		{{#label}}<div class="citizen-menu__heading">{{.}}</div>{{/label}}
 		<ul class="citizen-menu__content-list utw-navbar-list">
-			{{#array-children}}{{>NavbarSubitem}}{{/array-children}}
+			{{#array-list-items}}{{>NavbarSubitem}}{{/array-list-items}}
 		</ul>
 	</nav>
-	{{/array-list-items}}
 	{{/array-portlets-rest}}
 	{{^is-language-in-content}}
 	{{#data-languages}}{{>Menu}}{{/data-languages}}
 	{{/is-language-in-content}}
-</section>
-
--- original
-<section id="{{id}}" class="citizen-main-menu citizen-drawer__menu">
-	{{#data-portlets-first}}{{>Menu}}{{/data-portlets-first}}
-	{{#array-portlets-rest}}{{>Menu}}{{/array-portlets-rest}}
 </section>
