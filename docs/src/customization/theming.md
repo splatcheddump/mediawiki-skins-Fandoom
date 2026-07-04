@@ -58,11 +58,11 @@ Surface colors form the depth hierarchy of the UI — lower numbers sit further 
 
 ## Typography
 
-Citizen ships with [Roboto Flex](https://fonts.google.com/specimen/Roboto+Flex) as its default typeface. You can swap it out by overriding the font family variables:
+Citizen ships with [Rubik](https://fonts.google.com/specimen/Rubik) as its default typeface. You can swap it out by overriding the font family variables:
 
 | Property | Description | Default value |
 | :--- | :--- | :--- |
-| `--font-family-citizen-base` | Most text in the UI. | `'Roboto'` |
+| `--font-family-citizen-base` | Most text in the UI. | `'Rubik'` |
 | `--font-family-citizen-serif` | Serif option in the editor and some extensions. | `'Roboto Serif'` |
 | `--font-family-citizen-monospace` | Code blocks and editors. | `'Roboto Mono'` |
 
@@ -88,7 +88,7 @@ Any font works, but [variable fonts](https://fonts.google.com/variablefonts) are
 
 Web fonts load asynchronously — until yours arrives, the browser shows a system fallback. If the two fonts have different metrics, text visibly resizes or shifts when the swap happens.
 
-Citizen ships a metric-matched fallback for Roboto Flex that hides this. If you've swapped Roboto for another font, you can do the same:
+Citizen ships a metric-matched fallback for Rubik that hides this. If you've swapped Rubik for another font, you can do the same:
 
 1. Generate override descriptors with a tool like [font-style-matcher](https://meowni.ca/font-style-matcher/) or [screenspan.net/fallback](https://screenspan.net/fallback).
 2. Add the resulting `@font-face` to your CSS under a distinct family name like `'Inter-fallback'`.
