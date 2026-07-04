@@ -200,7 +200,7 @@ function initDesktopSubmenus({ document, window }) {
 		return;
 	}
 
-	document.querySelectorAll('.citizen-header .citizen-main-menu .citizen-menu').forEach((menu) => {
+	document.querySelectorAll(':is(.citizen-header, .citizen-sticky-header) .citizen-main-menu .citizen-menu')
 		const trigger = menu.querySelector(':scope > .citizen-menu__heading');
 		const list = menu.querySelector(':scope > .citizen-menu__content-list');
 
