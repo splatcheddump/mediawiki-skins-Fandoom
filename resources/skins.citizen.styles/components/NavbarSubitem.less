@@ -3,8 +3,8 @@
 // ============================================================
 
 .utw-navbar-list {
-	margin: 0;
 	padding: 0;
+	margin: 0;
 	list-style: none;
 }
 
@@ -13,10 +13,10 @@
 // ---------------------------------------------------------------
 .utw-navbar-subitem {
 	position: relative;
-	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	list-style: none;
 
 	// Link
 	.utw-navbar-subitem-link {
@@ -29,8 +29,8 @@
 		font-weight: var( --font-weight-medium );
 		color: var( --color-base );
 		text-decoration: none;
-		transition: background-color var( --transition-duration-base ) var( --transition-timing-function-ease );
 		border-radius: var( --border-radius-base );
+		transition: background-color var( --transition-duration-base ) var( --transition-timing-function-ease );
 
 		&:hover,
 		&:focus {
@@ -76,19 +76,19 @@
 			top: 0;
 			left: 100%;
 			z-index: 1100;
+			visibility: hidden;
 			min-width: 15rem;
 			// Use padding instead of margin so the hover area is unbroken
 			padding-left: var( --space-xs );
+			pointer-events: none;
 			background-clip: padding-box;
 			opacity: 0;
-			visibility: hidden;
-			pointer-events: none;
-			transition: opacity var( --transition-duration-base ) var( --transition-timing-function-ease-out ),
-					visibility var( --transition-duration-base ) var( --transition-timing-function-ease-out );
+			transition:
+ opacity var( --transition-duration-base ) var( --transition-timing-function-ease-out ),visibility var( --transition-duration-base ) var( --transition-timing-function-ease-out );
 
 			.utw-navbar-menu {
-				margin: 0;
 				padding: var( --space-xs ) 0;
+				margin: 0;
 				list-style: none;
 				background-color: var( --background-color-base );
 				border: var( --border-width-base ) solid var( --border-color-base );
@@ -100,9 +100,9 @@
 		// Show flyout on hover/focus
 		&:hover > .utw-navbar-subitem-collapsable,
 		&:focus-within > .utw-navbar-subitem-collapsable {
-			opacity: 1;
 			visibility: visible;
 			pointer-events: auto;
+			opacity: 1;
 		}
 
 		// Highlight parent link while flyout is open
@@ -133,20 +133,20 @@
 
 	// JS-added chevron button for opening the slide panel
 	.utw-drawer-chevron {
-		flex-shrink: 0;
 		display: flex;
+		flex-shrink: 0;
 		align-items: center;
 		justify-content: center;
 		width: 2.5rem;
 		min-height: 2.25rem;
 		margin-inline-start: auto;
 		color: var( --color-subtle );
-		border-radius: var( --border-radius-base );
 		cursor: pointer;
+		border-radius: var( --border-radius-base );
 
 		&:hover {
-			background-color: var( --background-color-button-quiet--hover );
 			color: var( --color-base );
+			background-color: var( --background-color-button-quiet--hover );
 		}
 	}
 
@@ -163,13 +163,13 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
+		z-index: 10;
 		display: flex;
 		flex-direction: column;
+		overflow-y: auto;
 		background-color: var( --background-color-base );
 		transform: translateX( 100% );
 		transition: transform var( --transition-duration-base ) var( --transition-timing-function-ease );
-		overflow-y: auto;
-		z-index: 10;
 
 		&--active {
 			transform: translateX( 0 );
@@ -178,24 +178,24 @@
 		// Panel header (back button + title)
 		&__header {
 			display: flex;
-			align-items: center;
 			gap: var( --space-sm );
+			align-items: center;
 			padding: var( --space-xs ) var( --space-sm );
 			border-bottom: var( --border-subtle );
 		}
 
 		&__back {
 			display: flex;
+			flex-shrink: 0;
 			align-items: center;
 			justify-content: center;
 			width: 2.25rem;
 			height: 2.25rem;
-			border-radius: var( --border-radius-base );
+			color: var( --color-base );
+			cursor: pointer;
 			background: none;
 			border: none;
-			cursor: pointer;
-			color: var( --color-base );
-			flex-shrink: 0;
+			border-radius: var( --border-radius-base );
 
 			&:hover {
 				background-color: var( --background-color-button-quiet--hover );
@@ -203,19 +203,19 @@
 		}
 
 		&__title {
-			font-weight: var( --font-weight-bold );
-			font-size: var( --font-size-small );
-			text-transform: uppercase;
-			letter-spacing: 0.05em;
-			color: var( --color-subtle );
 			overflow: hidden;
 			text-overflow: ellipsis;
+			font-size: var( --font-size-small );
+			font-weight: var( --font-weight-bold );
+			color: var( --color-subtle );
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
 			white-space: nowrap;
 		}
 
 		&__list {
-			margin: 0;
 			padding: var( --space-xs ) 0;
+			margin: 0;
 			list-style: none;
 		}
 	}
@@ -231,9 +231,9 @@
 	.citizen-menu {
 		// Bridge gap between heading and dropdown with padding-top
 		.citizen-menu__content-list {
+			padding-top: var( --space-xs );
 			// No margin-top — use padding-top on the list itself
 			margin-top: 0;
-			padding-top: var( --space-xs );
 		}
 	}
 }

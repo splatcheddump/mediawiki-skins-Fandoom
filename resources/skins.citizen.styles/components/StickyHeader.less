@@ -74,36 +74,6 @@
 		}
 	}
 
-	&-backtotop {
-		flex-grow: 1;
-
-		&.cdx-button {
-			gap: var( --space-xs );
-			justify-content: flex-start;
-			max-width: none;
-		}
-
-		&:hover {
-			.citizen-ui-icon.mw-ui-icon-wikimedia-arrowUp {
-				opacity: 1;
-				transform: none;
-			}
-
-			.citizen-sticky-header-page-info {
-				transform: translateX( calc( var( --size-icon ) + var( --space-xs ) ) );
-			}
-		}
-
-		.citizen-ui-icon {
-			position: absolute;
-			opacity: 0;
-			transform: translateX( -25% );
-			transition-timing-function: var( --transition-timing-function-ease );
-			transition-duration: var( --transition-duration-medium );
-			transition-property: opacity, transform;
-		}
-	}
-
 	&-page-info {
 		overflow: hidden;
 		transition-timing-function: var( --transition-timing-function-ease );
@@ -156,7 +126,6 @@
 		}
 	}
 
-	.citizen-header__logo,
 	.mw-logo-wordmark,
 	.citizen-main-menu {
 		display: none;
@@ -173,10 +142,6 @@
 
 		&-inner {
 			max-width: none;
-		}
-
-		&-backtotop {
-			display: none;
 		}
 
 		.citizen-header__logo {
@@ -196,8 +161,8 @@
 		.citizen-main-menu {
 			display: flex;
 			flex: 1 1 auto;
-			align-items: center;
 			gap: var( --space-lg );
+			align-items: center;
 			min-width: 0;
 			overflow: visible;
 		}
@@ -210,8 +175,8 @@
 
 		.citizen-main-menu .citizen-menu .citizen-menu__heading {
 			display: flex;
-			align-items: center;
 			gap: var( --space-xs );
+			align-items: center;
 			min-height: 2.5rem;
 			padding-inline: var( --space-sm );
 			font-weight: var( --font-weight-bold );
@@ -221,15 +186,15 @@
 			cursor: pointer;
 
 			&::after {
-				content: '';
 				display: inline-block;
 				width: 0;
 				height: 0;
-				border-left: 4px solid transparent;
-				border-right: 4px solid transparent;
-				border-top: 4px solid currentcolor;
-				opacity: 0.7;
 				margin-inline-start: var( --space-xs );
+				content: '';
+				border-top: 4px solid currentcolor;
+				border-right: 4px solid transparent;
+				border-left: 4px solid transparent;
+				opacity: 0.7;
 				transition: transform var( --transition-duration-base ) var( --transition-timing-function-ease );
 			}
 		}
@@ -244,20 +209,20 @@
 			left: 0;
 			z-index: 1000;
 			display: flex;
+			visibility: hidden;
 			flex-direction: column;
 			min-width: 15rem;
 			padding-top: var( --space-xs );
 			padding-bottom: var( --space-xs );
+			pointer-events: none;
 			list-style: none;
 			background-color: var( --background-color-base );
 			border: var( --border-width-base ) solid var( --border-color-base );
 			border-radius: var( --border-radius-medium );
 			box-shadow: var( --box-shadow-large );
 			opacity: 0;
-			visibility: hidden;
-			pointer-events: none;
-			transition: opacity var( --transition-duration-base ) var( --transition-timing-function-ease-out ),
-					visibility var( --transition-duration-base ) var( --transition-timing-function-ease-out );
+			transition:
+ opacity var( --transition-duration-base ) var( --transition-timing-function-ease-out ),visibility var( --transition-duration-base ) var( --transition-timing-function-ease-out );
 
 			.utw-navbar-subitem {
 				width: 100%;
@@ -266,9 +231,9 @@
 
 		.citizen-main-menu .citizen-menu:hover .citizen-menu__content-list,
 		.citizen-main-menu .citizen-menu:focus-within .citizen-menu__content-list {
-			opacity: 1;
 			visibility: visible;
 			pointer-events: auto;
+			opacity: 1;
 		}
 
 		.cdx-button {

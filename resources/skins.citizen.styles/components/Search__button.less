@@ -4,7 +4,16 @@
 @search-handle-length: 7.778;
 
 .citizen-search {
+	.citizen-dropdown-details {
+		width: 10vw;
+	}
+
 	.citizen-dropdown-summary {
+		display: flex;
+		justify-content: start;
+		padding: 0 var( --space-sm );
+		background: var( --background-color-interactive );
+
 		> svg {
 			> circle {
 				stroke-dasharray: @search-circle-circumference;
