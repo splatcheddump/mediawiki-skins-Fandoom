@@ -47,6 +47,28 @@ class CitizenComponentMainMenu implements CitizenComponent {
 			return $portlet;
 		}
 
+		// Check if items already have native nesting (from * and ** syntax)
+		$hasNativeNesting = false;
+		foreach ( $listItems as $item ) {
+			if ( isset( $item['array-children'] ) && !empty( $item['array-children'] ) ) {
+				$hasNativeNesting = true;
+				break;
+			}
+		}
+
+		// If already natively nested, just mark parents and return
+		if ( $hasNativeNesting ) {
+			foreach ( $listItems as &$item ) {
+				if ( isset( $item['array-children'] ) && !empty( $item['array-children'] ) ) {
+					$item['has-children'] = true;
+					$item['item-class'] = trim( ( $item['item-class'] ?? '' ) . ' citizen-menu__item--has-children' );
+				}
+			}
+			unset( $item );
+			return $portlet;
+		}
+
+		// Otherwise, parse delimiter-based nesting (/ or >)
 		$tree = [];
 		foreach ( $listItems as $item ) {
 			$this->insertTreeItem( $tree, $item, $this->getTreePath( $item ) );
