@@ -47,24 +47,28 @@ class CitizenComponentMainMenu implements CitizenComponent {
 			return $portlet;
 		}
 
-		// Check if items already have native nesting (from * and ** syntax)
+		// Check if items have native nesting in array-children already
 		$hasNativeNesting = false;
 		foreach ( $listItems as $item ) {
-			if ( isset( $item['array-children'] ) && !empty( $item['array-children'] ) ) {
+			if ( isset( $item['array-children'] ) && is_array( $item['array-children'] ) && !empty( $item['array-children'] ) ) {
 				$hasNativeNesting = true;
 				break;
 			}
 		}
 
-		// If already natively nested, just mark parents and return
+		// If already natively nested (from * and ** in sidebar), mark parents recursively
 		if ( $hasNativeNesting ) {
-			foreach ( $listItems as &$item ) {
-				if ( isset( $item['array-children'] ) && !empty( $item['array-children'] ) ) {
-					$item['has-children'] = true;
-					$item['item-class'] = trim( ( $item['item-class'] ?? '' ) . ' citizen-menu__item--has-children' );
-				}
-			}
-			unset( $item );
+			$portlet['array-list-items'] = array_map(
+				fn ( array $item ): array => $this->markChildrenRecursively( $item ),
+				$listItems
+			);
+			return $portlet;
+		}
+
+		// If items have item-level set (flat structure from sidebar), build tree
+		if ( $this->isFlatStructure( $listItems ) ) {
+			$tree = $this->buildTreeFromFlatList( $listItems );
+			$portlet['array-list-items'] = $tree;
 			return $portlet;
 		}
 
@@ -76,6 +80,65 @@ class CitizenComponentMainMenu implements CitizenComponent {
 
 		$portlet['array-list-items'] = array_values( $tree );
 		return $portlet;
+	}
+
+	private function isFlatStructure( array $listItems ): bool {
+		foreach ( $listItems as $item ) {
+			if ( isset( $item['item-level'] ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private function buildTreeFromFlatList( array $listItems ): array {
+		$tree = [];
+		$stack = [];
+
+		foreach ( $listItems as $item ) {
+			$level = (int)( $item['item-level'] ?? 0 );
+
+			// Initialize children array if needed
+			if ( !isset( $item['array-children'] ) ) {
+				$item['array-children'] = [];
+			}
+
+			// Pop stack until we're at the right level
+			while ( count( $stack ) >= $level ) {
+				array_pop( $stack );
+			}
+
+			// If we have a parent, add this item as its child
+			if ( !empty( $stack ) ) {
+				$parent = &$stack[ count( $stack ) - 1 ];
+				$parent['array-children'][] = $item;
+				$parent['has-children'] = true;
+				$parent['item-class'] = trim( ( $parent['item-class'] ?? '' ) . ' citizen-menu__item--has-children' );
+			} else {
+				// Top-level item
+				$tree[] = $item;
+			}
+
+			// Add to stack for potential children
+			$stack[] = &$item;
+		}
+
+		// Clean up references
+		unset( $item );
+
+		return array_values( $tree );
+	}
+
+	private function markChildrenRecursively( array $item ): array {
+		if ( isset( $item['array-children'] ) && is_array( $item['array-children'] ) && !empty( $item['array-children'] ) ) {
+			$item['has-children'] = true;
+			$item['item-class'] = trim( ( $item['item-class'] ?? '' ) . ' citizen-menu__item--has-children' );
+			$item['array-children'] = array_map(
+				fn ( array $child ): array => $this->markChildrenRecursively( $child ),
+				$item['array-children']
+			);
+		}
+		return $item;
 	}
 
 	private function insertTreeItem( array &$tree, array $item, array $path ): void {
