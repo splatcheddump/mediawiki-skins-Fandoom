@@ -86,8 +86,7 @@
 		border-radius: var( --border-radius-medium );
 		box-shadow: var( --box-shadow-large );
 		opacity: 0;
-		transition:
- opacity var( --transition-duration-medium ) var( --transition-timing-function-ease-out ),visibility var( --transition-duration-medium ) var( --transition-timing-function-ease-out );
+		transition: opacity var( --transition-duration-medium ) var( --transition-timing-function-ease-out ),visibility var( --transition-duration-medium ) var( --transition-timing-function-ease-out );
 
 		.utw-navbar-subitem {
 			width: 100%;
@@ -95,15 +94,12 @@
 	}
 
 	.citizen-wiki-navigation .citizen-menu:hover .citizen-menu__content-list,
-	.citizen-wiki-navigation .citizen-menu:focus-within .citizen-menu__content-list {
+	.citizen-wiki-navigation .citizen-menu:focus-within .citizen-menu__content-list,
+	.citizen-main-menu .citizen-menu:hover .citizen-menu__content-list,
+	.citizen-main-menu .citizen-menu:focus-within .citizen-menu__content-list {
 		visibility: visible;
 		pointer-events: auto;
 		opacity: 1;
-	}
-
-	.citizen-main-menu .citizen-menu .citizen-menu__content-list {
-		position: fixed;
-		top: 50px;
 	}
 
 	.citizen-wiki-navigation {
