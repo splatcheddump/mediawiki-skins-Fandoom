@@ -251,13 +251,14 @@ const init = ( { document, window, mw, IntersectionObserver } ) => {
 	);
 
 	const
-		stickyHeaderElement = document.getElementById( STICKY_HEADER_ID ),
-		stickyIntersection = document.getElementById( 'citizen-page-header-sticky-sentinel' );
+        stickyHeaderElement = document.getElementById( STICKY_HEADER_ID ),
+        // Query the .mw-body element instead of the original sentinel
+        stickyIntersection = document.querySelector( '.mw-body' );
 
 	const shouldStickyHeader = window.getComputedStyle( stickyIntersection )?.getPropertyValue( 'display' ) !== 'none';
-	const isStickyHeaderAllowed = !!stickyHeaderElement &&
-		!!stickyIntersection &&
-		shouldStickyHeader;
+    const isStickyHeaderAllowed = !!stickyHeaderElement &&
+        !!stickyIntersection &&
+        shouldStickyHeader;
 
 	const stickyHeaderInstance = isStickyHeaderAllowed ?
 		new StickyHeader( { stickyHeaderElement, document } ) :
