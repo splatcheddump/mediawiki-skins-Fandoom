@@ -252,8 +252,7 @@ const init = ( { document, window, mw, IntersectionObserver } ) => {
 
 	const
         stickyHeaderElement = document.getElementById( STICKY_HEADER_ID ),
-        // Query the .mw-body element instead of the original sentinel
-        stickyIntersection = document.querySelector( '.mw-body' );
+        stickyIntersection = document.querySelector( '.citizen-wiki-navigation' );
 
 	const shouldStickyHeader = window.getComputedStyle( stickyIntersection )?.getPropertyValue( 'display' ) !== 'none';
     const isStickyHeaderAllowed = !!stickyHeaderElement &&
