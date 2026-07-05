@@ -228,5 +228,7 @@
 	"citizen-command-palette-queryaction-fulltext-search-description": "Search the full text of all pages",
 	"citizen-command-palette-queryaction-page-edit-description": "Create or edit page",
 
-	"citizen-config-usenewtoken": "Opt-in switch for the new color token pipeline. Defaults to false; set to true to enable. The new pipeline becomes the default — and legacy is removed — in the next major Citizen release."
+	"citizen-config-usenewtoken": "Opt-in switch for the new color token pipeline. Defaults to false; set to true to enable. The new pipeline becomes the default — and legacy is removed — in the next major Citizen release.",
+
+	"citizen-pages": "pages"
 }
