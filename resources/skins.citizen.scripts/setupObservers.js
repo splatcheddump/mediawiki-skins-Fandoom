@@ -307,13 +307,13 @@ const init = ( { document, window, mw, IntersectionObserver } ) => {
 	const scrollObserver = createScrollObserver( { IntersectionObserver } );
     const pageHeaderObserver = scrollObserver.observe(
         () => {
-            document.body.classList.remove( PAGE_TITLE_INTERSECTION_CLASS );
-            pauseStickyHeader();
-        },
-        () => {
-            document.body.classList.add( PAGE_TITLE_INTERSECTION_CLASS );
-            resumeStickyHeader();
-        }
+			document.body.classList.add( PAGE_TITLE_INTERSECTION_CLASS );
+			resumeStickyHeader();
+		},
+		() => {
+			document.body.classList.remove( PAGE_TITLE_INTERSECTION_CLASS );
+			pauseStickyHeader();
+		}
     );
 
 	pageHeaderObserver.observe( stickyIntersection );
